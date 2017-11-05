@@ -7,6 +7,7 @@ var inner = puzzle.getElementsByTagName("DIV");
 var width = 0;
 var height = 0;
 
+
 createPuzzle();
 puzzle.style.setProperty("top", "-100px");
 changeTop();
@@ -14,6 +15,7 @@ changeLeft();
 Grid();
 changeHover();
 getall();
+shuffleClick();
 }
 
 function createPuzzle(){
@@ -38,6 +40,17 @@ var puzzle = document.getElementById("puzzlearea").getElementsByTagName("DIV");
 				console.log(result);
 			}
 		});
+	}
+}
+function shuffleClick(){
+	var click = document.getElementById("shufflebutton");
+	click.addEventListener("click",shuffle);
+}
+
+function shuffle(){
+	for (var j = 1; j<=100;j++){
+		piece = Math.floor((Math.random() * 14) + 0);
+		move(piece);
 	}
 }
 
@@ -97,7 +110,6 @@ function move(piece){
 	var puzzle = document.getElementById("puzzlearea")
 	var inner = puzzle.getElementsByTagName("DIV")[piece];
 	temp=inner.style.top;
-	console.log(temp);
 	inner.style.top= emptyTop;
 	emptyTop= temp;
 	temp=inner.style.left;
