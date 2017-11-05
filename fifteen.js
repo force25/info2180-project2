@@ -17,7 +17,7 @@ main.appendChild(btn2);
 main.appendChild(btn3);
 main.appendChild(btn4);
 main.appendChild(btn5);
-var text1= document.createTextNode("Background1");
+var text1= document.createTextNode("Default");
 var text2= document.createTextNode("Background2");
 var text3= document.createTextNode("Background3");
 var text4= document.createTextNode("Background4");
@@ -27,7 +27,7 @@ btn2.appendChild(text2);
 btn3.appendChild(text3);
 btn4.appendChild(text4);
 btn5.appendChild(text5);
-var id1 = btn1.setAttribute("id","Default");
+var id1 = btn1.setAttribute("id","button1");
 var id2 = btn2.setAttribute("id","button2");
 var id3 = btn3.setAttribute("id","button3");
 var id4 = btn4.setAttribute("id","button4");
@@ -45,8 +45,123 @@ shuffleClick();
 changeBack();
 }
 
+function createPuzzle(){
+var puzzle = document.getElementById("puzzlearea");
+var inner = puzzle.getElementsByTagName("DIV");
+for (var j = 0; j<inner.length;j++){
+  inner[j].setAttribute("class","puzzlepiece");
+  
+		}
+	}
+
+function getall(){
+var p
+var puzzle = document.getElementById("puzzlearea").getElementsByTagName("DIV");
+	for (var j = 0; j<puzzle.length;j++){
+		puzzle[j].addEventListener("click", function(){
+			 p = parseInt(this.innerHTML-1);
+			ifmoveable(p);
+		if(result=="true"){
+			move(p);
+			}
+			else{
+				console.log(result);
+			}
+		});
+	}
+}
+function shuffleClick(){
+	var click = document.getElementById("shufflebutton");
+	click.addEventListener("click",shuffle);
+}
+function shuffle(){
+	for (var j = 1; j<=100;j++){
+		piece = Math.floor((Math.random() * 14) + 0);
+		move(piece);
+	}
+}
+function changeHover(){
+	var puzzle = document.getElementById("puzzlearea").getElementsByTagName("DIV");
+	for (var j = 0; j<puzzle.length;j++){
+		puzzle[j].addEventListener("mouseover", function(){
+		p = parseInt(this.innerHTML-1);
+		ifmoveable(p);
+		if (result=="true"){
+		this.style.textDecoration="underline";
+		this.style.borderColor = "red";
+		this.style.color="#006600";
+		toDefaualt();
+		}
+		else{return 0;}
+});
+	}
+}
+function toDefaualt(){
+	var puzzle = document.getElementById("puzzlearea").getElementsByTagName("DIV");
+	for (var j = 0; j<puzzle.length;j++){
+		puzzle[j].addEventListener("mouseleave", function(){
+		if (result=="true"){
+		this.style.borderColor="black";
+		this.style.textDecoration="none";
+		this.style.color="black";
+		}
+		else{return 0;}
+});
+	}
+}
+function ifmoveable(piece){
+   var puzzle = document.getElementById("puzzlearea").getElementsByTagName("DIV");
+   var topEmpty  = parseInt(emptyTop);
+   var leftEmpty  =  parseInt(emptyLeft);
+		if(parseInt(puzzle[piece].style.left)+100 ==leftEmpty && parseInt(puzzle[piece].style.top) == topEmpty){			
+			result = "true";
+   }
+   else if(parseInt(puzzle[piece].style.left)-100 ==leftEmpty && parseInt(puzzle[piece].style.top) == topEmpty){
+			result = "true";
+   }
+   else if(parseInt(puzzle[piece].style.left) ==leftEmpty && parseInt(puzzle[piece].style.top)+100== topEmpty){
+			result = "true";
+   }
+   else if(parseInt(puzzle[piece].style.left)==leftEmpty && parseInt(puzzle[piece].style.top)-100 == topEmpty){
+			result = "true";
+   }
+   else{
+	   result= "false";
+   }
+}
+function move(piece){
+	var puzzle = document.getElementById("puzzlearea")
+	var inner = puzzle.getElementsByTagName("DIV")[piece];
+	temp=inner.style.top;
+	inner.style.top= emptyTop;
+	emptyTop= temp;
+	temp=inner.style.left;
+	inner.style.left= emptyLeft;
+	emptyLeft= temp;
+}		
+function changeTop(){
+var width = 0;
+var puzzle = document.getElementById("puzzlearea").getElementsByTagName("DIV");
+for (var j = 0; j<puzzle.length;j++){
+   if (j%4 == 0){
+	 width = width+100;
+   }
+   puzzle[j].style.setProperty("top", width+"px");
+	}
+}
+function changeLeft(){
+var puzzle = document.getElementById("puzzlearea").getElementsByTagName("DIV");
+var height = 0;
+	for (var j = 0; j<puzzle.length;j++){
+	 height = height+100;
+	 if (j%4 == 0){
+	 height = 100;
+   }
+	 puzzle[j].style.setProperty("left", height+"px");
+   }
+}
 function changeBack(){
-var bg1 = document.getElementById("Default");
+var bg1 = document.getElementById("button1");
 var bg2 = document.getElementById("button2");
 var bg3 = document.getElementById("button3");
 var bg4 = document.getElementById("button4");
@@ -81,7 +196,7 @@ var b;
 function decideImage(bg){
 var puzzle = document.getElementById("puzzlearea")
 var inner = puzzle.getElementsByTagName("DIV");
-	if(bg== "Background1"){
+	if(bg== "Default"){
 		for (var j = 0; j<inner.length;j++){
 		inner[j].style.backgroundImage = "url('https://raw.githubusercontent.com/force25/info2180-project2/gh-pages/background.jpg')";
 				}
@@ -106,131 +221,8 @@ var inner = puzzle.getElementsByTagName("DIV");
 		inner[j].style.backgroundImage = "url('https://raw.githubusercontent.com/force25/info2180-project2/gh-pages/scathach.jpg')";
 				}			
 		}
-		else{return console.log("d");}
+		else{return console.log("false");}
 }
-
-function createPuzzle(){
-var puzzle = document.getElementById("puzzlearea");
-var inner = puzzle.getElementsByTagName("DIV");
-for (var j = 0; j<inner.length;j++){
-  inner[j].setAttribute("class","puzzlepiece");
-  
-		}
-	}
-
-function getall(){
-var p
-var puzzle = document.getElementById("puzzlearea").getElementsByTagName("DIV");
-	for (var j = 0; j<puzzle.length;j++){
-		puzzle[j].addEventListener("click", function(){
-			 p = parseInt(this.innerHTML-1);
-			ifmoveable(p);
-		if(result=="true"){
-			move(p);
-			}
-			else{
-				console.log(result);
-			}
-		});
-	}
-}
-function shuffleClick(){
-	var click = document.getElementById("shufflebutton");
-	click.addEventListener("click",shuffle);
-}
-
-function shuffle(){
-	for (var j = 1; j<=100;j++){
-		piece = Math.floor((Math.random() * 14) + 0);
-		move(piece);
-	}
-}
-
-function changeHover(){
-	var puzzle = document.getElementById("puzzlearea").getElementsByTagName("DIV");
-	for (var j = 0; j<puzzle.length;j++){
-		puzzle[j].addEventListener("mouseover", function(){
-		p = parseInt(this.innerHTML-1);
-		ifmoveable(p);
-		if (result=="true"){
-		this.style.textDecoration="underline";
-		this.style.borderColor = "red";
-		this.style.color="#006600";
-		toDefaualt();
-		}
-		else{return 0;}
-});
-	}
-}
-
-function toDefaualt(){
-	var puzzle = document.getElementById("puzzlearea").getElementsByTagName("DIV");
-	for (var j = 0; j<puzzle.length;j++){
-		puzzle[j].addEventListener("mouseleave", function(){
-		if (result=="true"){
-		this.style.borderColor="black";
-		this.style.textDecoration="none";
-		this.style.color="black";
-		}
-		else{return 0;}
-});
-	}
-}
-
-
-function ifmoveable(piece){
-   var puzzle = document.getElementById("puzzlearea").getElementsByTagName("DIV");
-   var topEmpty  = parseInt(emptyTop);
-   var leftEmpty  =  parseInt(emptyLeft);
-		if(parseInt(puzzle[piece].style.left)+100 ==leftEmpty && parseInt(puzzle[piece].style.top) == topEmpty){			
-			result = "true";
-   }
-   else if(parseInt(puzzle[piece].style.left)-100 ==leftEmpty && parseInt(puzzle[piece].style.top) == topEmpty){
-			result = "true";
-   }
-   else if(parseInt(puzzle[piece].style.left) ==leftEmpty && parseInt(puzzle[piece].style.top)+100== topEmpty){
-			result = "true";
-   }
-   else if(parseInt(puzzle[piece].style.left)==leftEmpty && parseInt(puzzle[piece].style.top)-100 == topEmpty){
-			result = "true";
-   }
-   else{
-	   result= "false";
-   }
-}
-function move(piece){
-	var puzzle = document.getElementById("puzzlearea")
-	var inner = puzzle.getElementsByTagName("DIV")[piece];
-	temp=inner.style.top;
-	inner.style.top= emptyTop;
-	emptyTop= temp;
-	temp=inner.style.left;
-	inner.style.left= emptyLeft;
-	emptyLeft= temp;
-}		
-
-function changeTop(){
-var width = 0;
-var puzzle = document.getElementById("puzzlearea").getElementsByTagName("DIV");
-for (var j = 0; j<puzzle.length;j++){
-   if (j%4 == 0){
-	 width = width+100;
-   }
-   puzzle[j].style.setProperty("top", width+"px");
-	}
-}
-function changeLeft(){
-var puzzle = document.getElementById("puzzlearea").getElementsByTagName("DIV");
-var height = 0;
-	for (var j = 0; j<puzzle.length;j++){
-	 height = height+100;
-	 if (j%4 == 0){
-	 height = 100;
-   }
-	 puzzle[j].style.setProperty("left", height+"px");
-   }
-}
-
 function Grid(){
 var puzzle = document.getElementById("puzzlearea")
 var inner = puzzle.getElementsByTagName("DIV");
