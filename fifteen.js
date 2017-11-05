@@ -27,7 +27,7 @@ btn2.appendChild(text2);
 btn3.appendChild(text3);
 btn4.appendChild(text4);
 btn5.appendChild(text5);
-var id1 = btn1.setAttribute("id","button1");
+var id1 = btn1.setAttribute("id","Background1");
 var id2 = btn2.setAttribute("id","button2");
 var id3 = btn3.setAttribute("id","button3");
 var id4 = btn4.setAttribute("id","button4");
@@ -45,10 +45,6 @@ shuffleClick();
 changeBack();
 }
 
-function anyBg(){
-	
-}
-
 function createPuzzle(){
 var puzzle = document.getElementById("puzzlearea");
 var inner = puzzle.getElementsByTagName("DIV");
@@ -57,7 +53,6 @@ for (var j = 0; j<inner.length;j++){
   
 		}
 	}
-
 function getall(){
 var p
 var puzzle = document.getElementById("puzzlearea").getElementsByTagName("DIV");
@@ -165,7 +160,7 @@ var height = 0;
    }
 }
 function changeBack(){
-var bg1 = document.getElementById("button1");
+var bg1 = document.getElementById("Background1");
 var bg2 = document.getElementById("button2");
 var bg3 = document.getElementById("button3");
 var bg4 = document.getElementById("button4");
@@ -225,7 +220,7 @@ var inner = puzzle.getElementsByTagName("DIV");
 		inner[j].style.backgroundImage = "url('https://raw.githubusercontent.com/force25/info2180-project2/gh-pages/scathach.jpg')";
 				}			
 		}
-		else{return console.log("false");}
+		else{return console.log("d");}
 }
 function Grid(){
 var puzzle = document.getElementById("puzzlearea")
