@@ -45,6 +45,10 @@ shuffleClick();
 changeBack();
 }
 
+function anyBg(){
+	
+}
+
 function createPuzzle(){
 var puzzle = document.getElementById("puzzlearea");
 var inner = puzzle.getElementsByTagName("DIV");
