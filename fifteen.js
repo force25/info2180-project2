@@ -12,6 +12,7 @@ puzzle.style.setProperty("top", "-100px");
 changeTop();
 changeLeft();
 Grid();
+changeHover();
 getall();
 }
 
@@ -44,12 +45,34 @@ function changeHover(){
 	var puzzle = document.getElementById("puzzlearea").getElementsByTagName("DIV");
 	for (var j = 0; j<puzzle.length;j++){
 		puzzle[j].addEventListener("mouseover", function(){
-		this.style.borderColor = "red";
+		p = parseInt(this.innerHTML-1);
+		ifmoveable(p);
+		if (result=="true"){
 		this.style.textDecoration="underline";
-		this.style.color="green";
+		this.style.borderColor = "red";
+		this.style.color="#006600";
+		toDefaualt();
+		}
+		else{return 0;}
 });
 	}
 }
+
+function toDefaualt(){
+	var puzzle = document.getElementById("puzzlearea").getElementsByTagName("DIV");
+	for (var j = 0; j<puzzle.length;j++){
+		puzzle[j].addEventListener("mouseleave", function(){
+		if (result=="true"){
+		this.style.borderColor="black";
+		this.style.textDecoration="none";
+		this.style.color="black";
+		}
+		else{return 0;}
+});
+	}
+}
+
+
 function ifmoveable(piece){
    var puzzle = document.getElementById("puzzlearea").getElementsByTagName("DIV");
    var topEmpty  = parseInt(emptyTop);
