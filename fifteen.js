@@ -109,7 +109,6 @@ var inner = puzzle.getElementsByTagName("DIV");
 		else{return console.log("d");}
 }
 
-
 function createPuzzle(){
 var puzzle = document.getElementById("puzzlearea");
 var inner = puzzle.getElementsByTagName("DIV");
